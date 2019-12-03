@@ -1,5 +1,5 @@
 ## Storing the data
-powerConsumption <- read.table("C:/Users/dkcho/Downloads/exdata_data_household_power_consumption/household_power_consumption.txt", skip=1, sep=";")
+powerConsumption <- read.table("household_power_consumption.txt", skip=1, sep=";")
 
 ## Giving heading names to the data
 names(powerConsumption) <- c("Date", "Time", "Global_active_power", "Global_reactive_power", "Voltage", "Global_intensity", "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
@@ -15,5 +15,11 @@ febPowerConsumption$Time <- strptime(febPowerConsumption$Time, format="%H:%M:%S"
 febPowerConsumption[1:1440,"Time"] <- format(febPowerConsumption[1:1440,"Time"],"2007-02-01 %H:%M:%S")
 febPowerConsumption[1441:2880,"Time"] <- format(febPowerConsumption[1441:2880,"Time"],"2007-02-02 %H:%M:%S")
 
+# Determining the copy file format and its size
+png("plot2.png", width = 480, height = 480)
+
 ## Plotting the graph
 plot(febPowerConsumption$Time, as.numeric(as.character(febPowerConsumption$Global_active_power)), type="l", xlab="", ylab="Global Active Power (kilowatts)") 
+
+# dev.off
+dev.off()
