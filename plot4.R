@@ -1,5 +1,5 @@
 ## Storing the data
-powerConsumption <- read.table("C:/Users/dkcho/Downloads/exdata_data_household_power_consumption/household_power_consumption.txt", skip=1, sep=";")
+powerConsumption <- read.table("household_power_consumption.txt", skip=1, sep=";")
 
 ## Giving heading names to the data
 names(powerConsumption) <- c("Date", "Time", "Global_active_power", "Global_reactive_power", "Voltage", "Global_intensity", "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
@@ -14,6 +14,9 @@ febPowerConsumption$Time <- strptime(febPowerConsumption$Time, format="%H:%M:%S"
 ## Need to divide time into minutes
 febPowerConsumption[1:1440,"Time"] <- format(febPowerConsumption[1:1440,"Time"],"2007-02-01 %H:%M:%S")
 febPowerConsumption[1441:2880,"Time"] <- format(febPowerConsumption[1441:2880,"Time"],"2007-02-02 %H:%M:%S")
+
+# Determining the copy file format and its size
+png("plot4.png", width = 480, height = 480)
 
 ## Initialise 2x2 Graph
 par(mfrow=c(2,2))
@@ -33,3 +36,6 @@ legend("topright", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_met
 
 ## Plot 4
 plot(febPowerConsumption$Time, febPowerConsumption$Global_reactive_power, type = "l", xlab = "datetime", ylab = "Global_reactive_power")
+
+# dev.off
+dev.off()
