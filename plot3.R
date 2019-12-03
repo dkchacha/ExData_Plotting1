@@ -15,6 +15,9 @@ febPowerConsumption$Time <- strptime(febPowerConsumption$Time, format="%H:%M:%S"
 febPowerConsumption[1:1440,"Time"] <- format(febPowerConsumption[1:1440,"Time"],"2007-02-01 %H:%M:%S")
 febPowerConsumption[1441:2880,"Time"] <- format(febPowerConsumption[1441:2880,"Time"],"2007-02-02 %H:%M:%S")
 
+# Determining the copy file format and its size
+png("plot3.png", width = 480, height = 480)
+
 ## Plotting the Graph
 plot(febPowerConsumption$Time, febPowerConsumption$Sub_metering_1, type = "l", xlab = "", ylab = "Energy sub metering")
 
@@ -24,3 +27,6 @@ points(febPowerConsumption$Time, febPowerConsumption$Sub_metering_3, type = "l",
 
 ## Adding the key for the lines
 legend("topright", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
+# dev.off
+dev.off()
